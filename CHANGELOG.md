@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 2.1.0
 
 ### Added
-* GoTor API - A Golang implementation of Core TorBot functionality.
+* GoTor API - A Golang implementation of Core ghostcrawler functionality.
 * Phone number extractor - Extracts phone numbers from urls.
 * Integrated NLP module with TorBot
 * Major code refactoring
