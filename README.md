@@ -42,7 +42,9 @@
 ## Installation
 
 ### From source
-Before you run the torBot make sure the following things are done properly:
+Before you run the GhostCrawler make sure the following things are done properly:
+
+### Mac/Linux/Windows:
 
 * Run the tor service:
 ```sh
@@ -50,18 +52,26 @@ sudo service tor start
 ```
 * Make sure that your torrc is configured to SOCKS_PORT localhost:9050
 
+```sh
+git clone https://github.com/Pandya-mayur/GhostCrawler.git
+cd GhostCrawler
+```
+
 * Open a new terminal and run:
 ```sh
 cd gotor && go run cmd/main/main.go -server
 ```
-
-* Install TorBot Python requirements using poetry
+* Install GhostCrawler Python requirements using poetry
 
 ```sh
 poetry install # to install dependencies
 poetry run python run.py -u https://www.example.com --depth 2 -v # example of running command with poetry
 poetry run python run.py -h # for help
 ```
+
+
+
+
 
 <pre>
 usage: Gather and analayze data from Tor sites.
@@ -103,7 +113,7 @@ optional arguments:
 On Linux platforms, you can make an executable for TorBot by using the install.sh script.
 You will need to give the script the correct permissions using `chmod +x install.sh`
 Now you can run `./install.sh` to create the GhostCrwaler binary.
-Run `./torBot` to execute the program.
+Run `./GhostCrawler` to execute the program.
 
 
 ## Curated Features
@@ -116,7 +126,7 @@ Run `./torBot` to execute the program.
 - [ ] Social Media Integration
 - [ ] Increase anonymity
 - [x] Improve performance (Done with gotor)
-- [ ] Screenshot capture
+- [x] Screenshot capture
 
 
 
