@@ -102,7 +102,7 @@ optional arguments:
 
 On Linux platforms, you can make an executable for TorBot by using the install.sh script.
 You will need to give the script the correct permissions using `chmod +x install.sh`
-Now you can run `./install.sh` to create the torBot binary.
+Now you can run `./install.sh` to create the GhostCrwaler binary.
 Run `./torBot` to execute the program.
 
 
