@@ -1,5 +1,5 @@
 #!/bin/bash
-
+mkdir -p tmp_build 
 # Makes directory for dependencies and executable to be installed
 
 mkdir -p tmp_dist
