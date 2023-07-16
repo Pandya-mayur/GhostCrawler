@@ -79,32 +79,32 @@ Contributor name will be updated to the below list. 😀
 
 
 ## Basic setup
-Before you run the torBot make sure the following things are done properly:
+Before you run the GhostCrawler make sure the following things are done properly:
 
 * Run tor service
 `sudo service tor start`
 
 * Make sure that your torrc is configured to SOCKS_PORT localhost:9050
 
-* Install TorBot Python requirements
+* Install GhostCrawler Python requirements
 `pip3 install -r requirements.txt`
 
-On Linux platforms, you can make an executable for TorBot by using the install.sh script.
+On Linux platforms, you can make an executable for GhostCrawler by using the install.sh script.
 You will need to give the script the correct permissions using `chmod +x install.sh`
-Now you can run `./install.sh` to create the torBot binary.
-Run `./torBot` to execute the program. 
+Now you can run `./install.sh` to create the GhostCrawler binary.
+Run `./GhostCrawler` to execute the program. 
 
-An alternative way of running torBot is shown below, along with help instructions.
+An alternative way of running GhostCrawler is shown below, along with help instructions.
 
-`python3 torBot.py or use the -h/--help argument`
+`python3 GhostCrawler.py or use the -h/--help argument`
 <pre>
-usage: torBot.py [-h] [-v] [--update] [-q] [-u URL] [-s] [-m] [-e EXTENSION]
+usage: GhostCrawler.py [-h] [-v] [--update] [-q] [-u URL] [-s] [-m] [-e EXTENSION]
                  [-l] [-i]
 
 optional arguments:
   -h, --help            Show this help message and exit
-  -v, --version         Show current version of TorBot.
-  --update              Update TorBot to the latest stable version
+  -v, --version         Show current version of GhostCrawler.
+  --update              Update GhostCrawler to the latest stable version
   -q, --quiet           Prevent header from displaying
   -u URL, --url URL     Specifiy a website link to crawl, currently returns links on that page
   -s, --save            Save results to a file in json format
