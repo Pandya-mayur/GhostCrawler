@@ -7,11 +7,11 @@ mkdir -p tmp_dist
 pip install pyinstaller 
 
 # Creates executable file and sends dependences to the recently created directories
-pyinstaller --onefile --workpath ./tmp_build --distpath ./tmp_dist torBot.py
+pyinstaller --onefile --workpath ./tmp_build --distpath ./tmp_dist GhostCrawler.py
 
 # Puts the executable in the current directory
-mv tmp_dist/torBot . 
+mv tmp_dist/GhostCrawler . 
 
 # Removes both directories and unneeded file
 rm -r tmp_build tmp_dist
-rm torBot.spec
+rm GhostCrawler.spec
