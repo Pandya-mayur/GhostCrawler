@@ -1,37 +1,36 @@
  <pre>
 
-                            ████████╗ ██████╗ ██████╗     ██████╗  ██████╗ ████████╗
-                            ╚══██╔══╝██╔═══██╗██╔══██╗    ██╔══██╗██╔═████╗╚══██╔══╝
-                               ██║   ██║   ██║██████╔╝    ██████╔╝██║██╔██║   ██║
-                               ██║   ██║   ██║██╔══██╗    ██╔══██╗████╔╝██║   ██║
-                               ██║   ╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║
-                               ╚═╝    ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝
+
+
+██████╗ ██╗  ██╗ ██████╗ ███████╗████████╗ ██████╗██████╗  █████╗ ██╗    ██╗██╗     ███████╗██████╗ 
+██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗██╔══██╗██║    ██║██║     ██╔════╝██╔══██╗
+██║  ███╗███████║██║   ██║███████╗   ██║   ██║     ██████╔╝███████║██║ █╗ ██║██║     █████╗  ██████╔╝
+██║   ██║██╔══██║██║   ██║╚════██║   ██║   ██║     ██╔══██╗██╔══██║██║███╗██║██║     ██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║╚██████╔╝███████║   ██║   ╚██████╗██║  ██║██║  ██║╚███╔███╔╝███████╗███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝  ╚═╝
+                                                                                                     
+
+
+             Empowering Exploration: GhostCrawler - Open Source Intelligence for the DarkWeb
+  
                                                      
-</pre>
-[![Build Status](https://travis-ci.org/DedSecInside/TorBot.svg?branch=dev)](https://travis-ci.org/DedSecInside/TorBoT)
-[![](https://img.shields.io/badge/Donate-Bitcoin-blue.svg?style=flat)](https://blockchain.info/address/14st7SzDbQZuu8fpQ74x477WoRJ7gpHFaj)
-[![](https://img.shields.io/badge/Built%20with-❤-orange.svg?style=flat)]()
-[![](https://img.shields.io/badge/Made%20with-Python-red.svg?style=flat)]()
 
 ## OSINT tool for Deep and Dark Web.
 
-Open-source intelligence offers value in information security decision making through knowledge of threats and malicious activities that potentially impact business. Open-source intelligence using the internet is common, however, using the darknet is less common for the typical cybersecurity analyst. The challenges to using the darknet for open-source intelligence includes using specialized collection, processing, and analysis tools. TorBot is an open source intelligence tool developed in python. The main objective of this project is to collect open data from the deep web (aka dark web) and with the help of data mining algorithms, collect as much information as possible and produce an interactive tree graph. The interactive tree graph module will be able to display the relations of the collected intelligence data. 
+GhostCrawler is an open-source intelligence tool developed in Python that enables deep exploration of the Dark Web. It offers valuable insights into information security, providing knowledge about threats and malicious activities that can impact businesses. While open-source intelligence using the internet is common, venturing into the darknet poses unique challenges for cybersecurity analysts. GhostCrawler addresses these challenges by utilizing specialized collection, processing, and analysis tools.
  
-### Motivation 
+## Explore the Hidden Depths 
 
-  The idea of developing an open source intelligence tool like TorBot emerged from the deep web itself. Crawling a collection of web pages which has high anonymity and complex data encryption without an index is a tedious (and sometimes dangerous) task. The crawler in TorBot has to be designed in such a way that the links are identified from a webpage (any webpage) and other links are identified and crawled recursively, then combining all these links to form an index. Each link is then crawled for more links and emails for intelligence information. Unlike surface web discovery tool, a deep web discovery tool is limited for both general and domain-specific search. 
-  
-  Extensive use of Dark web for communication of terrorism-related information makes it a challenge for Law Enforcement Agencies. TorBot should be able to monitor such illegal activities that are happening in this encrypted network. Therefore, this tool will be able to ease the task of finding such activities by an intelligence group or researchers, thus making this the main objective of TorBot. 
+Motivated by the need to navigate the deep web, GhostCrawler aims to collect open data from the dark web and leverage data mining algorithms to extract as much information as possible. The tool generates an interactive tree graph that visually represents the relationships among the collected intelligence data. This graph module allows users to delve into the intricate web of connections within the darknet. 
  
  
-### Objective
+### Versatile Applications
 
-Though the main objective of TorBot is to identify illegal activities in the deep web and visualize the relations of data collected using a graph, there are several ways this tool can be useful. For example, TorBot will be able to crawl and create an index for the deep web. This index can be stored in a database or a JSON file for future use. Other features like live checker will be able to check whether a web address is alive or dead. This is important as deep web links are constantly changed for privacy and security reasons. For researchers and security enthusiasts the TorBot can be used for checking basic vulnerabilities in a dark web page.
+Beyond its primary objective of identifying illegal activities, GhostCrawler offers a range of useful features. It can crawl and create an index for the deep web, storing the index in a database or a JSON file for future reference. The tool includes a live checker to verify the availability of web addresses, which is particularly important given the dynamic nature of deep web links. Researchers and security enthusiasts can utilize GhostCrawler to assess basic vulnerabilities in dark web pages, expanding their understanding of the security landscape.
 
 
-### Working Procedure/Basic Plan
-The basic procedure executed by the web crawling algorithm takes a list of seed URLs as its input and repeatedly executes
-the following steps:
+### How GhostCrawler Works
+GhostCrawler employs a web crawling algorithm that takes a list of seed URLs as input and executes a series of steps iteratively. These steps involve removing a URL from the list, checking the page's existence, downloading the page, assessing its relevance, extracting any embedded links, checking the cache for duplicate links, and adding unique links back to the URL list. After processing all URLs, GhostCrawler returns the most relevant page.
 
 1. Remove a URL from the URL list.
 2. Check existence of the page.
@@ -119,7 +118,6 @@ optional arguments:
 
 * NOTE: All flags under -u URL, --url URL must also be passed a -u flag.
 
-Read more about torrc here : [Torrc](https://github.com/DedSecInside/TorBoT/blob/master/Tor.md)
 
 ## TO-DO
 - [ ] Visualization Module
@@ -145,31 +143,9 @@ OSINT in Social Networks: In summary, they examined and compared the needs of th
 
 Data Mining in The Dark: This paper successfully explored an open-source intelligence automation toolset that scanned across the darknet. It described and shared the tools, process, and techniques to build a secure darknet connection, and then collected, processed, stored, and analysed data. This paper showed the viability of darknet open-source intelligence using the completed toolset. In the end, the toolset finds entities and links entities from the darknet thereby showing strong potential to aid the open source intelligence professional[4]. 
 
-### References
 
-    [1]	B. Akhgar, P. S. Bayerl, and F. Sampson, Open Source Intelligence Investigation. From strategy to implementation.     2016.
-    [2]	T. Minárik and A.-M. Osula, “Tor does not stink: Use and abuse of the Tor anonymity network from the perspective of law,” Comput. Law Secur. Rev., vol. 32, no. 1, pp. 111–127, Feb. 2016.
-    [3]	Benjamin Robert Holland, “Enabling Open Source Intelligence (OSINT) in private social networks,” 2012.
-    [4]	Brian Nafziger, “Data Mining in the Dark: Darknet Intelligence Automation,” Secur. Home IoT Netw., no. Security 401, pp. 1–32, 2017.
-    [5]	A. R. Behjat, A. Mustapha, H. Nezamabadi-Pour, M. N. Sulaiman, and N. Mustapha, “A New Binary Particle Swarm   Optimization for Feature Subset Selection with Support Vector Machine,” in Recent Advances on Soft Computing and Data   Mining, 2014, pp. 47–57.
-    [6]	H. Parmar, S. Bhanderi, and G. Shah, “Sentiment Mining of Movie Reviews using Random Forest with Tuned Hyperparameters.” 2014.
 
 
 ## License
 GNU Public License
 
-## CREDITS
-
-- [X] [P5N4PPZ](https://github.com/PSNAppz) - Owner
-- [X] [KingAkeem](https://github.com/KingAkeem) - Experienced Contributor,Reviewer,Core Member
-- [X] [agrepravin](https://github.com/agrepravin) - Contributor,Reviewer
-- [X] [shivankar-madaan](https://github.com/shivankar-madaan) - Experienced Contributor
-- [X] [y-mehta](https://github.com/y-mehta) - Contributor
-- [X] [Manfredi Martorana](https://github.com/Agostinelli) - Contributor
-- [X] [Evan Sia Wai Suan](https://github.com/waisuan) - New Contributor
-- [X] [Lean](https://github.com/leaen) - New Contributor
-- [X] [Gus](https://github.com/HotPushUpGuy420) - New Contributor
-- [X] [SubaruSama](https://github.com/SubaruSama) - New Contributor
-- [X] [robly78746](https://github.com/robly78746) - New Contributor
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Opensource.svg/200px-Opensource.svg.png)
