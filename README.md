@@ -93,10 +93,10 @@ optional arguments:
 - Ensure than you have a tor container running on port 9050.
 - Build the image using following command (in the root directory):
 
-    `docker build -f docker/Dockerfile -t dedsecinside/torbot .`
+    `docker build -f docker/Dockerfile -t Pandya-mayur/GhostCrawler .`
 - Run the container (make sure to link the tor container as `tor`):
 
-    `docker run --link tor:tor --rm -ti dedsecinside/torbot`
+    `docker run --link tor:tor --rm -ti Pandya-mayur/GhostCrawler`
 
 ### Using executable (Linux Only)
 
