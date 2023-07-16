@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from torbot import main
+from GhostCrawler import main
 
 if __name__ == '__main__':
     try:
