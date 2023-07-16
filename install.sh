@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Makes directory for dependencies and executable to be installed
-mkdir -p tmp_build 
+
 mkdir -p tmp_dist
 
 pip install pyinstaller 
