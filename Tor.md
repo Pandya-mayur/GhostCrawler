@@ -2,7 +2,7 @@
 
 Look at your torrc for the following configuration options...
 
- Tor uses a text file called torrc that contains configuration instructions for how your Tor program should behave. The default configuration should work fine for most Tor users.
+Tor uses a text file called torrc that contains configuration instructions for how your Tor program should behave. The default configuration should work fine for most Tor users.
 
 If you installed Tor Browser on Windows or Linux, look for Browser/TorBrowser/Data/Tor/torrc inside your Tor Browser directory. If you're on macOS, the torrc is in ~/Library/Application Support/TorBrowser-Data/Tor . To get to it, press cmd-shift-g while in Finder and copy/paste that directory into the box that appears.
 
