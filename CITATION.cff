@@ -1,11 +1,11 @@
 # @InProceedings{10.1007/978-981-15-0146-3_19,
-# author="Narayanan, P. S.
+# author pandya mayur
 # and Ani, R.
 # and King, Akeem T. L.",
 # editor="Ranganathan, G.
 # and Chen, Joy
 # and Rocha, {\'A}lvaro",
-# title="TorBot: Open Source Intelligence Tool for Dark Web",
+# title="ghostcrawler: Open Source Intelligence Tool for Dark Web",
 # booktitle="Inventive Communication and Computational Technologies",
 # year="2020",
 # publisher="Springer Singapore",
@@ -35,6 +35,6 @@ identifiers:
   - type: doi
     value: 10.1007/978-981-15-0146-3_19
 license: GNU Public License
-reposiory-code: https://github.com/DedSecInside/TorBot
-title: TorBot - Open Source Intelligence Tool for Dark Web
+reposiory-code: https://github.com/pandya mayur/ghostcrawle
+title: ghostcrawler - Open Source Intelligence Tool for Dark Web
 date-released: 2020-01-30
