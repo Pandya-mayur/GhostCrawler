@@ -37,7 +37,7 @@
 (see requirements.txt for more details)
 
 ### Golang Dependencies
-- https://github.com/KingAkeem/gotor (This service needs to be ran in tandem with TorBot)
+- https://github.com/KingAkeem/gotor (This service needs to be ran in tandem with GhostCrawler)
 
 ## Installation
 
