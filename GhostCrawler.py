@@ -19,8 +19,8 @@ from modules.info import execute_all
 LOCALHOST = "127.0.0.1"
 DEFPORT = 9050
 
-# TorBot VERSION
-__VERSION = "1.3.1"
+# GhostCrawler VERSION
+__VERSION = "1.0"
 
 
 def connect(address, port):
@@ -87,8 +87,8 @@ def header():
     title = r"""
                                     {banner}
                     #######################################################
-                    #  TorBot - An OSINT Tool for Deep Web                #
-                    #  GitHub : https://github.com/DedsecInside/TorBot    #
+                    #  GhostCrawler - An OSINT Tool for Deep Web                #
+                    #  GitHub : https://github.com/DedsecInside/GhostCrawler    #
                     #  Help : use -h for help text                        #
                     #######################################################
                                   {license_msg} 
@@ -100,14 +100,14 @@ def header():
 
 def get_args():
     """
-    Parses user flags passed to TorBot
+    Parses user flags passed to GhostCrawler
     """
-    parser = argparse.ArgumentParser(prog="TorBot",
+    parser = argparse.ArgumentParser(prog="GhostCrawler",
                                      usage="Gather and analayze data from Tor sites.")
     parser.add_argument("--version", action="store_true",
-                        help="Show current version of TorBot.")
+                        help="Show current version of GhostCrawler.")
     parser.add_argument("--update", action="store_true",
-                        help="Update TorBot to the latest stable version")
+                        help="Update GhostCrawler to the latest stable version")
     parser.add_argument("-q", "--quiet", action="store_true")
     parser.add_argument("-u", "--url", help="Specifiy a website link to crawl")
     parser.add_argument("--ip", help="Change default ip of tor")
@@ -132,7 +132,7 @@ def get_args():
 
 def main():
     """
-    TorBot's Core
+    GhostCrawler's Core
     """
     args = get_args()
     connect(args.ip, args.port)
@@ -140,7 +140,7 @@ def main():
     # If flag is -v, --update, -q/--quiet then user only runs that operation
     # because these are single flags only
     if args.version:
-        print("TorBot Version:" + __VERSION)
+        print("GhostCrawler Version:" + __VERSION)
         exit()
     if args.update:
         updateTor()
@@ -177,7 +177,7 @@ def main():
             if args.save:
                 saveJson("Links", node.links)
     else:
-        print("usage: See torBot.py -h for possible arguments.")
+        print("usage: See GhostCrawler.py -h for possible arguments.")
 
     print("\n\n")
 
