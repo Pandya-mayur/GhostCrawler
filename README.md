@@ -33,7 +33,7 @@
 - deeplink
 
 ## 🛠️ Installation
-### With PyPI
+### With Pip
 
 ```pip3 install GhostCrawler2```
 
@@ -44,7 +44,8 @@ git clone https://github.com/Pandya-mayur/GhostCrawler.git
 cd GhostCrawler2/
 python3 setup.py install
 ```
-
+### Demo
+https://youtu.be/_XI_WH8stlo
 
 ## 📈  Usage
 ## Ex
@@ -84,17 +85,6 @@ optional arguments:
 [...]
 ```
 
-### Multi-processing behaviour
-
-By default, the script will run with the parameter `mp_units = cpu_count() - 1`. It means if you have a machine with 4 cores,
-it will run 3 scraping functions in parallel. You can force `mp_units` to any value but it is recommended to leave to default.
-You may want to set it to 1 to run all requests sequentially (disabling multi-processing feature).
-
-Please note that continuous writing to csv file has not been *heavily* tested with multiprocessing feature and therefore
-may not work as expected.
-
-Please also note that the progress bars may not be properly displayed when `mp_units` is greater than 1.
-**It does not affect the results**, so don't worry.
 
 ### Examples
 
