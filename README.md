@@ -13,6 +13,124 @@
 </pre>
 
 
+
+## 📚 Currently supported Search engines
+- ahmia
+- darksearchio
+- onionland
+- notevil
+- darksearchenginer
+- phobos
+- GhostCrawler2server
+- torgle
+- GhostCrawler2engine
+- tordex
+- tor66
+- tormax
+- haystack
+- multivac
+- evosearch
+- deeplink
+
+## 🛠️ Installation
+### With PyPI
+
+```pip3 install GhostCrawler2```
+
+### With Github
+
+```bash
+git clone https://github.com/megadose/GhostCrawler2.git
+cd GhostCrawler2/
+python3 setup.py install
+```
+
+
+## 📈  Usage
+
+Help:
+```
+usage: GhostCrawler2 [-h] [--proxy PROXY] [--output OUTPUT]
+                  [--continuous_write CONTINUOUS_WRITE] [--limit LIMIT]
+                  [--engines [ENGINES [ENGINES ...]]]
+                  [--exclude [EXCLUDE [EXCLUDE ...]]]
+                  [--fields [FIELDS [FIELDS ...]]]
+                  [--field_delimiter FIELD_DELIMITER] [--mp_units MP_UNITS]
+                  search
+
+positional arguments:
+  search                The search string or phrase
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --proxy PROXY         Set Tor proxy (default: 127.0.0.1:9050)
+  --output OUTPUT       Output File (default: output_$SEARCH_$DATE.txt), where $SEARCH is replaced by the first chars of the search string and $DATE is replaced by the datetime
+  --continuous_write CONTINUOUS_WRITE
+                        Write progressively to output file (default: False)
+  --limit LIMIT         Set a max number of pages per engine to load
+  --engines [ENGINES [ENGINES ...]]
+                        Engines to request (default: full list)
+  --exclude [EXCLUDE [EXCLUDE ...]]
+                        Engines to exclude (default: none)
+  --fields [FIELDS [FIELDS ...]]
+                        Fields to output to csv file (default: engine name link), available fields are shown below
+  --field_delimiter FIELD_DELIMITER
+                        Delimiter for the CSV fields
+  --mp_units MP_UNITS   Number of processing units (default: core number minus 1)
+
+[...]
+```
+
+### Multi-processing behaviour
+
+By default, the script will run with the parameter `mp_units = cpu_count() - 1`. It means if you have a machine with 4 cores,
+it will run 3 scraping functions in parallel. You can force `mp_units` to any value but it is recommended to leave to default.
+You may want to set it to 1 to run all requests sequentially (disabling multi-processing feature).
+
+Please note that continuous writing to csv file has not been *heavily* tested with multiprocessing feature and therefore
+may not work as expected.
+
+Please also note that the progress bars may not be properly displayed when `mp_units` is greater than 1.
+**It does not affect the results**, so don't worry.
+
+### Examples
+
+To request all the engines for the word "computer":
+```
+GhostCrawler2 "computer"
+```
+
+To request all the engines excepted "Ahmia" and "Candle" for the word "computer":
+```
+GhostCrawler2 "computer" --exclude ahmia candle
+```
+
+To request only "Tor66", "DeepLink" and "Phobos" for the word "computer":
+```
+GhostCrawler2 "computer" --engines tor66 deeplink phobos
+```
+
+The same as previously but limiting to 3 the number of pages to load per engine:
+```
+GhostCrawler2 "computer" --engines tor66 deeplink phobos --limit 3
+```
+
+Please kindly note that the list of supported engines (and their keys) is given in the script help (-h).
+
+
+### Output
+
+#### Default output
+
+By default, the file is written at the end of the process. The file will be csv formatted, containing the following columns:
+```
+"engine","name of the link","url"
+```
+
+
+
+
+
 ### Features
 1. Onion Crawler (.onion)
 2. Returns Page title and address with a short description about the site
