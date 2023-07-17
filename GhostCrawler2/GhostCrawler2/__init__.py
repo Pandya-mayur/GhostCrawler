@@ -1,1 +1,1 @@
-from onionsearch.core import *
+from GhostCrawler2.core import *
