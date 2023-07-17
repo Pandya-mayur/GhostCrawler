@@ -1,161 +1,191 @@
 """
-Core
+MAIN MODULE
 """
 import argparse
-import sys
+import socket
+import socks
 
-from .modules import link_io
-from .modules.linktree import LinkTree
-from .modules.color import color
-from .modules.updater import check_version
-from .modules.savefile import saveJson
-from .modules.info import execute_all
-from .modules.collect_data import collect_data
-from .modules.nlp import main
+from requests.exceptions import HTTPError
 
-from . import version
+from modules.analyzer import LinkTree
+from modules.color import color
+from modules.link_io import LinkIO
+from modules.link import LinkNode
+from modules.updater import updateTor
+from modules.savefile import saveJson
+from modules.info import execute_all
+
+# GLOBAL CONSTS
+LOCALHOST = "127.0.0.1"
+DEFPORT = 9050
+
+# GhostCrawler VERSION
+__VERSION = "1.0"
 
 
-# TorBot CLI class
-class TorBot:
+def connect(address, port):
+    """ Establishes connection to port
 
-    def __init__(self, args):
-        self.args = args
+    Assumes port is bound to localhost, if host that port is bound to changes
+    then change the port
 
-    def get_header(self):
-        license_msg = color("LICENSE: GNU Public License v3", "red")
-        banner = r"""
-                              __  ____  ____  __        ______
-                             / /_/ __ \/ __ \/ /_  ____/_  __/
-                            / __/ / / / /_/ / __ \/ __ \/ /
-                           / /_/ /_/ / _, _/ /_/ / /_/ / /
-                           \__/\____/_/ |_/_____/\____/_/  V{VERSION}
-                """.format(VERSION=version.__version__)
-        banner = color(banner, "red")
+    Args:
+        address: address for port to bound to
+        port: Establishes connect to this port
+    """
 
-        title = r"""
-                                        {banner}
-                        #######################################################
-                        #  TorBot - Dark Web OSINT Tool                       #
-                        #  GitHub : https://github.com/DedsecInside/TorBot    #
-                        #  Help : use -h for help text                        #
-                        #######################################################
-                                    {license_msg}
-                """
+    if address and port:
+        socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, address, port)
+    elif address:
+        socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, address, DEFPORT)
+    elif port:
+        socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, LOCALHOST, port)
+    else:
+        socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, LOCALHOST, DEFPORT)
 
-        title = title.format(license_msg=license_msg, banner=banner)
-        print(title)
+    socket.socket = socks.socksocket  # Monkey Patch our socket to tor socket
 
-    def handle_json_args(self, args):
+    def getaddrinfo(*args):
         """
-        Outputs JSON file for data
+        Overloads socket function for std socket library
+        Check socket.getaddrinfo() documentation to understand parameters.
+        Simple description below:
+        argument - explanation (actual value)
+        socket.AF_INET - the type of address the socket can speak to (IPV4)
+        sock.SOCK_STREAM - creates a stream connecton rather than packets
+        6 - protocol being used is TCP
+        Last two arguments should be a tuple containing the address and port
         """
+        return [(socket.AF_INET, socket.SOCK_STREAM, 6,
+                 '', (args[0], args[1]))]
+    socket.getaddrinfo = getaddrinfo
 
-        # -m/--mail
-        if args.mail:
-            email_json = link_io.print_emails(args.url)
-            if args.save:
-                saveJson('Emails', email_json)
-        # -p/--phone
-        if args.phone:
-            phone_json = link_io.print_phones(args.url)
-            if args.save:
-                saveJson('Phones', phone_json)
-        # -s/--save
-        else:
-            node_json = link_io.print_json(args.url, args.depth)
-            saveJson("Links", node_json)
 
-    def handle_tree_args(self, args):
-        """
-        Outputs tree visual for data
-        """
-        tree = LinkTree(args.url, args.depth)
-        # -v/--visualize
-        if args.visualize:
-            tree.show()
+def header():
+    """
+    Prints out header ASCII art
+    """
+    license_msg = color("LICENSE: GNU Public License", "red")
+    banner = r"""
+                          
 
-        # -d/--download
-        if args.download:
-            file_name = str(input("File Name (.txt): "))
-            tree.save(file_name)
 
-    def perform_action(self):
-        args = self.args
-        if args.gather:
-            collect_data(args.url)
-            return
+                        
+    █████╗ ██╗  ██╗ ██████╗ ███████╗████████╗ ██████╗██████╗  █████╗ ██╗    ██╗██╗     ███████╗██████╗ 
+██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗██╔══██╗██║    ██║██║     ██╔════╝██╔══██╗
+██║  ███╗███████║██║   ██║███████╗   ██║   ██║     ██████╔╝███████║██║ █╗ ██║██║     █████╗  ██████╔╝
+██║   ██║██╔══██║██║   ██║╚════██║   ██║   ██║     ██╔══██╗██╔══██║██║███╗██║██║     ██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║╚██████╔╝███████║   ██║   ╚██████╗██║  ██║██║  ██║╚███╔███╔╝███████╗███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝  ╚═╝                     
+                                                                                            V{VERSION}
 
-        # If flag is -v, --update, -q/--quiet then user only runs that operation
-        # because these are single flags only
-        if args.version:
-            print("TorBot Version:" + self.__version__)
-            sys.exit()
-        if args.update:
-            check_version()
-            sys.exit()
-        if not args.quiet:
-            self.get_header()
-        # If url flag is set then check for accompanying flag set. Only one
-        # additional flag can be set with -u/--url flag
-        if not args.url:
-            print("usage: See run.py -h for possible arguments.")
-        link_io.print_tor_ip_address()
-        if args.classify:
-            result = main.classify(args.url)
-            print("Website Classification: " + result[0], "| Accuracy: " + str(result[1]))
-        if args.visualize or args.download:
-            self.handle_tree_args(args)
-            # raise NotImplementedError("Tree visualization and download is not available yet.")
-        elif args.save or args.mail or args.phone:
-            self.handle_json_args(args)
-        # -i/--info
-        elif args.info:
-            execute_all(args.url)
-        else:
-            if args.url:
-                link_io.print_tree(args.url, args.depth, args.classifyAll)
-        print("\n\n")
+
+
+              """.format(VERSION=__VERSION)
+    banner = color(banner, "red")
+
+    title = r"""
+                                    {banner}
+                    #######################################################
+                    #  GhostCrawler - An OSINT Tool for Deep Web                #
+                    #  GitHub : https://github.com/DedsecInside/GhostCrawler    #
+                    #  Help : use -h for help text                        #
+                    #######################################################
+                                  {license_msg} 
+              """
+
+    title = title.format(license_msg=license_msg, banner=banner)
+    print(title)
 
 
 def get_args():
     """
-    Parses user flags passed to TorBot
+    Parses user flags passed to GhostCrawler
     """
-    parser = argparse.ArgumentParser(prog="TorBot", usage="Gather and analayze data from Tor sites.")
-    parser.add_argument("--version", action="store_true", help="Show current version of TorBot.")
-    parser.add_argument("--update", action="store_true", help="Update TorBot to the latest stable version")
+    parser = argparse.ArgumentParser(prog="GhostCrawler",
+                                     usage="Gather and analayze data from Tor sites.")
+    parser.add_argument("--version", action="store_true",
+                        help="Show current version of GhostCrawler.")
+    parser.add_argument("--update", action="store_true",
+                        help="Update GhostCrawler to the latest stable version")
     parser.add_argument("-q", "--quiet", action="store_true")
     parser.add_argument("-u", "--url", help="Specifiy a website link to crawl")
-    parser.add_argument("-s", "--save", action="store_true", help="Save results in a file")
-    parser.add_argument("-m", "--mail", action="store_true", help="Get e-mail addresses from the crawled sites")
-    parser.add_argument("-p", "--phone", action="store_true", help="Get phone numbers from the crawled sites")
-    parser.add_argument("--depth", help="Specifiy max depth of crawler (default 1)", default=1)
-    parser.add_argument("--gather", action="store_true", help="Gather data for analysis")
-    parser.add_argument("-v", "--visualize", action="store_true", help="Visualizes tree of data gathered.")
-    parser.add_argument("-d", "--download", action="store_true", help="Downloads tree of data gathered.")
-    parser.add_argument(
-        "-e",
-        "--extension",
-        action='append',
-        dest='extension',
-        default=[],
-        help=' '.join(("Specifiy additional website", "extensions to the list(.com , .org, .etc)"))
-    )
-    parser.add_argument("-c", "--classify", action="store_true", help="Classify the webpage using NLP module")
-    parser.add_argument(
-        "-cAll", "--classifyAll", action="store_true", help="Classify all the obtained webpages using NLP module"
-    )
-    parser.add_argument(
-        "-i", "--info", action="store_true", help=' '.join(("Info displays basic info of the scanned site"))
-    )
+    parser.add_argument("--ip", help="Change default ip of tor")
+    parser.add_argument("-p", "--port", help="Change default port of tor")
+    parser.add_argument("-s", "--save", action="store_true",
+                        help="Save results in a file")
+    parser.add_argument("-m", "--mail", action="store_true",
+                        help="Get e-mail addresses from the crawled sites")
+    parser.add_argument("-e", "--extension", action='append', dest='extension',
+                        default=[],
+                        help=' '.join(("Specifiy additional website",
+                                       "extensions to the list(.com , .org, .etc)")))
+    parser.add_argument("-i", "--info", action="store_true",
+                        help=' '.join(("Info displays basic info of the",
+                                       "scanned site")))
+    parser.add_argument("-v", "--visualize", action="store_true",
+                        help="Visualizes tree of data gathered.")
+    parser.add_argument("-d", "--download", action="store_true",
+                        help="Downloads tree of data gathered.")
     return parser.parse_args()
 
 
+def main():
+    """
+    GhostCrawler's Core
+    """
+    args = get_args()
+    connect(args.ip, args.port)
+
+    # If flag is -v, --update, -q/--quiet then user only runs that operation
+    # because these are single flags only
+    if args.version:
+        print("GhostCrawler Version:" + __VERSION)
+        exit()
+    if args.update:
+        updateTor()
+        exit()
+    if not args.quiet:
+        header()
+    # If url flag is set then check for accompanying flag set. Only one
+    # additional flag can be set with -u/--url flag
+    if args.url:
+        try:
+            node = LinkNode(args.url)
+        except (ValueError, HTTPError, ConnectionError) as err:
+            raise err
+        LinkIO.display_ip()
+        # -m/--mail
+        if args.mail:
+            print(node.emails)
+            if args.save:
+                saveJson('Emails', node.emails)
+        # -i/--info
+        elif args.info:
+            execute_all(node.name)
+            if args.save:
+                print('Nothing to save.\n')
+        elif args.visualize:
+            tree = LinkTree(node)
+            tree.show()
+        elif args.download:
+            tree = LinkTree(node)
+            file_name = str(input("File Name (.pdf/.png/.svg): "))
+            tree.save(file_name)
+        else:
+            LinkIO.display_children(node)
+            if args.save:
+                saveJson("Links", node.links)
+    else:
+        print("usage: See GhostCrawler.py -h for possible arguments.")
+
+    print("\n\n")
+
+
 if __name__ == '__main__':
+
     try:
-        args = get_args()
-        torbot = TorBot(args)
-        torbot.perform_action()
+        main()
+
     except KeyboardInterrupt:
         print("Interrupt received! Exiting cleanly...")
