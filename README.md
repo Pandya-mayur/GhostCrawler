@@ -40,14 +40,17 @@
 ### With Github
 
 ```bash
-git clone https://github.com/megadose/GhostCrawler2.git
+git clone https://github.com/Pandya-mayur/GhostCrawler.git
 cd GhostCrawler2/
 python3 setup.py install
 ```
 
 
 ## 📈  Usage
-
+## Ex
+```
+GhostCrawler2 "Ethical Hacking" --engines onionland torgle tor66 haystack
+```
 Help:
 ```
 usage: GhostCrawler2 [-h] [--proxy PROXY] [--output OUTPUT]
