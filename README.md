@@ -35,13 +35,13 @@
 ## 🛠️ Installation
 ### With Pip
 
-```pip3 install GhostCrawler2```
+```pip3 install GhostCrawler```
 
 ### With Github
 
 ```bash
 git clone https://github.com/Pandya-mayur/GhostCrawler.git
-cd GhostCrawler2/
+cd GhostCrawler
 python3 setup.py install
 ```
 ### Demo
